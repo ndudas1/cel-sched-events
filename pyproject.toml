@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "CEL Scheduled Events"
+version = "0.1.0"
+description = "A brief description of your project."
+authors = ["Your Name <youremail@example.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "3.11.7"
+Flask = "2.0.1"
+requests = "2.25.1"
+numpy = "1.23.0"
+asyncio = "3.4.3"
+aiohttp = "3.7.4"
+SQLAlchemy = "1.4.50"
+FastAPI = "0.95.2"
+uvicorn = "0.22.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

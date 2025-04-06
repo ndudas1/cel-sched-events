@@ -1,0 +1,8 @@
+Flask==2.3.2
+requests==2.31.0
+numpy==1.25.0
+asyncio==3.4.3
+aiohttp==3.8.5
+SQLAlchemy==2.0.16
+FastAPI==0.103.1
+uvicorn==0.23.2
