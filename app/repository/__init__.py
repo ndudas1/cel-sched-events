@@ -13,7 +13,6 @@ logging.basicConfig(
 
 # Database connection string
 url = os.getenv('DATABASE_URL')
-logging.info(f"Database URL: {url}")
 
 engine = create_engine(url, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
