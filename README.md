@@ -1,38 +1,49 @@
 # Project Title
 
-A brief description of what this project does and its purpose.
+Simple event scheduler, that uses FastAPI, Postgresql and SqlAlchemy to do basic operations.
 
-## Installation
+## Running the project
 
-To install the required dependencies, run:
+You can choose to debug the project or run from Docker (the recommended approach)
+
+### Using Docker (recommended)
+
+Docker compose will download all the required images and start them installing all dependencies.
+They can be viewed in the __docker-compose.yaml__ file.
+
+```
+docker-compose up
+```
+
+### Debug
+
+Create a virtual environment
+
+```
+python -m venv .venv
+```
+
+Activate the environment
+
+```
+source .venv/bin/activate
+```
+
+Install the required dependencies, run:
 
 ```
 pip install -r requirements.txt
 ```
 
-## Usage
-
-Provide examples of how to use the project. For instance:
-
-```bash
-python src/main.py
-```
-
-## Contributing
-
-If you would like to contribute to this project, please fork the repository and submit a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Making Requests
+## Making API Requests
 
 You may Curl
 
 # Get all events
 
-```curl -H "Content-Type: application/json" http://localhost:8000/events/```
+```
+curl -H "Content-Type: application/json" http://localhost:8000/events/
+```
 
 # Create a new event
 
