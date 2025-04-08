@@ -13,6 +13,7 @@ SQLAlchemy = "1.4.50"
 FastAPI = "0.95.2"
 uvicorn = "0.22.0"
 psycopg2-binary = "2.9.8"
+python-dateutil = "2.8.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

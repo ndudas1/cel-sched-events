@@ -18,6 +18,6 @@ def create_item(item: dict):
 
 @app.put("/events/{event_id}")
 def update_item(event_id: int, item: dict):
-    return {"item_id": event_id, "item": item}
+    return service.update_event(event_id, item)
 
 

@@ -43,5 +43,5 @@ curl -X POST -H "Content-Type: application/json" -d '{"name": "my event", "email
 # Patch an event
 
 ```
-curl -X PUT -H "Content-Type: application/json" -d '{"name": "my event", "email": "y@me.com", "start_time": "2025-10-04T22:00:00-07:00"}' http://localhost:8000/events
+curl -X PUT -H "Content-Type: application/json" -d '{"name": "my event", "email": "y@me.com", "start_time": "2025-10-04T22:00:00-07:00"}' http://localhost:8000/events/{event_id}
 ```
