@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 ### Making API Requests
 
-You may Curl
+You can use Curl commands to interact with the API; common use cases follow.
 
 #### Get all events
 

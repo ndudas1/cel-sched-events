@@ -58,12 +58,12 @@ class EventService:
             )
         date = (start, end)
         interfering_event = self.event_repository.get_event_by_date_and_freq(date, existing_event.frequency)
-        if interfering_event:
+        if interfering_event and interfering_event.id != event_id:
             raise HTTPException(
               status_code=400,
               detail=f"There is an Event whose schedule interfers."
             )
-        event = self.event_repository.update_event(event_id, event)
+        event = self.event_repository.update_event(event_id, updated_event)
         return JSONResponse(
             status_code=200,
             content={"message": "Event updated successfully.", "event_id": event.id}
