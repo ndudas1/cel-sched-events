@@ -1,4 +1,4 @@
-# Project Title
+# CEL Event Scheduler
 
 Simple event scheduler, that uses FastAPI, Postgresql and SqlAlchemy to do basic operations.
 
@@ -35,23 +35,23 @@ Install the required dependencies, run:
 pip install -r requirements.txt
 ```
 
-## Making API Requests
+### Making API Requests
 
 You may Curl
 
-# Get all events
+## Get all events
 
 ```
 curl -H "Content-Type: application/json" http://localhost:8000/events/
 ```
 
-# Create a new event
+## Create a new event
 
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"name": "my event", "email": "y@me.com", "start_time": "2025-10-01T22:00:00-07:00", "end_time": "2025-10-01T22:30:00-07:00"}' http://localhost:8000/events
 ```
 
-# Patch an event
+## Patch an event
 
 ```
 curl -X PUT -H "Content-Type: application/json" -d '{"name": "my event", "email": "y@me.com", "start_time": "2025-10-04T22:00:00-07:00"}' http://localhost:8000/events/{event_id}
