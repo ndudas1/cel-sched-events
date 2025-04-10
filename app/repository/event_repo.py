@@ -1,9 +1,15 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil import parser
 from typing import Tuple
 from app.repository.models.event import Event
 from app.repository import db_engine
-from sqlalchemy import or_ as _or, and_ as _and, extract
+from sqlalchemy import or_ as _or, and_ as _and, func
+
+def calculate_occurence_on_day(event_start_end: Tuple[datetime, datetime], pending_Event_Start: datetime):
+    start, end = event_start_end
+    duration = end - start
+    offset = timedelta(days=(pending_Event_Start - start).days)
+    return (start + offset, start + offset + duration)
 
 class EventRepository:
     def __init__(self):
@@ -31,14 +37,10 @@ class EventRepository:
         if len(recurring) > 0:
             for event in recurring:
                 # Bitwise check for the frequency
-                if event.frequency & frequency > 0 and event.start_time < start and event.end_time < end:
-                    _start_diff = start - event.start_time
-                    _end_diff = end - event.end_time
-                    _start = event.start_time + _start_diff
-                    _end = event.end_time + _end_diff
+                if event.frequency & frequency > 0:
+                    _start, _end = calculate_occurence_on_day((event.start_time, event.end_time), start)
                     if _start <= start <= _end or _start <= end <= _end:
                         return event
-                    return event
 
     def create_event(self, event):
         new_event = Event(
