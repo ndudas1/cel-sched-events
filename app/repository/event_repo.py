@@ -15,12 +15,13 @@ class EventRepository:
     def get_event_by_id(self, event_id):
         return self.db.query(Event).filter(Event.id == event_id).first()
     
-    def get_event_by_date_and_freq(self, date: Tuple[datetime, datetime], frequency: int):
+    def get_first_event_by_date_and_freq(self, date: Tuple[datetime, datetime], frequency: int):
+        start, end = date
         # See if there is an exact match first
         exact_match = self.db.query(Event).filter(
             _or(
-                _and(Event.start_time <= date[0], date[0] <= Event.end_time),
-                _and(Event.start_time <= date[1], date[1] <= Event.end_time),
+                _and(Event.start_time <= start, start <= Event.end_time),
+                _and(Event.start_time <= end, end <= Event.end_time),
             )).first()
         if exact_match is not None:
             return exact_match
@@ -28,17 +29,16 @@ class EventRepository:
         # If no exact match, check for recurring events
         recurring = self.db.query(Event).filter(Event.frequency > 0).all()
         if len(recurring) > 0:
-            start = parser.parse(date[0])
-            end = parser.parse(date[1])
             for event in recurring:
-                if event.start_time < start and event.end_time < end and event.frequency & frequency == frequency:
+                # Bitwise check for the frequency
+                if event.frequency & frequency > 0 and event.start_time < start and event.end_time < end:
                     _start_diff = start - event.start_time
                     _end_diff = end - event.end_time
                     _start = event.start_time + _start_diff
                     _end = event.end_time + _end_diff
                     if _start <= start <= _end or _start <= end <= _end:
                         return event
-        
+                    return event
 
     def create_event(self, event):
         new_event = Event(
